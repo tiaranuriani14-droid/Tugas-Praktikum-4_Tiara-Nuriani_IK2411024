@@ -1,0 +1,155 @@
+-- =====================================================
+-- MEMBUAT DATABASE
+-- =====================================================
+
+CREATE DATABASE IF NOT EXISTS tugas_perulangan;
+
+USE tugas_perulangan;
+
+
+
+-- =====================================================
+-- LATIHAN 1
+-- Menampilkan angka 1 sampai 10 menggunakan LOOP
+-- =====================================================
+
+DROP PROCEDURE IF EXISTS tampil_angka;
+
+DELIMITER //
+
+CREATE PROCEDURE tampil_angka()
+BEGIN
+
+    -- Variabel dimulai dari 1
+    DECLARE angka INT DEFAULT 1;
+
+    -- Memulai LOOP
+    perulangan: LOOP
+
+        -- Menampilkan angka
+        SELECT angka AS hasil;
+
+        -- Menambah angka
+        SET angka = angka + 1;
+
+        -- Kondisi berhenti
+        IF angka > 10 THEN
+            LEAVE perulangan;
+        END IF;
+
+    END LOOP perulangan;
+
+END //
+
+DELIMITER ;
+
+
+
+
+
+-- =====================================================
+-- LATIHAN 2
+-- Menghitung total angka 1 sampai 20 menggunakan WHILE
+-- =====================================================
+
+DROP PROCEDURE IF EXISTS hitung_total;
+
+DELIMITER //
+
+CREATE PROCEDURE hitung_total()
+BEGIN
+
+    -- Counter mulai dari 1
+    DECLARE angka INT DEFAULT 1;
+
+    -- Total awal 0
+    DECLARE total INT DEFAULT 0;
+
+    -- Perulangan selama angka masih <= 20
+    WHILE angka <= 20 DO
+
+        -- Menambahkan angka ke total
+        SET total = total + angka;
+
+        -- Menambah angka
+        SET angka = angka + 1;
+
+    END WHILE;
+
+    -- Menampilkan hasil akhir
+    SELECT CONCAT('Total angka 1 sampai 20 = ', total) AS hasil;
+
+END //
+
+DELIMITER ;
+
+
+
+
+
+-- =====================================================
+-- LATIHAN 3
+-- Menampilkan bilangan genap 2 sampai 20
+-- =====================================================
+
+DROP PROCEDURE IF EXISTS tampil_genap;
+
+DELIMITER //
+
+CREATE PROCEDURE tampil_genap()
+BEGIN
+
+    -- Nilai awal 2
+    DECLARE i INT DEFAULT 2;
+
+    -- Perulangan selama i <= 20
+    WHILE i <= 20 DO
+
+        -- Menampilkan angka genap
+        SELECT i AS bilangan_genap;
+
+        -- Ditambah 2 supaya tetap genap
+        SET i = i + 2;
+
+    END WHILE;
+
+END //
+
+DELIMITER ;
+
+
+
+
+
+-- =====================================================
+-- LATIHAN 4
+-- Menghitung total belanja pelanggan
+-- =====================================================
+
+DROP PROCEDURE IF EXISTS total_belanja;
+
+DELIMITER //
+
+CREATE PROCEDURE total_belanja()
+BEGIN
+
+    -- Total awal Rp0
+    DECLARE total INT DEFAULT 0;
+
+    -- Perulangan selama total masih kurang dari 500000
+    WHILE total < 500000 DO
+
+        -- Menambah belanja Rp50000
+        SET total = total + 50000;
+
+        -- Menampilkan total belanja
+        SELECT CONCAT('Total belanja sekarang Rp', total) AS hasil;
+
+    END WHILE;
+
+    -- Pesan ketika target tercapai
+    SELECT 'Total belanja sudah mencapai Rp500000' AS hasil;
+
+END //
+
+DELIMITER ;
